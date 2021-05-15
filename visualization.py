@@ -24,7 +24,10 @@ def add_to_visualiztion(graph, ax):
 
     node_colors = []
     for vertex in graph.vertices:
-        node_colors.append(vertex.get_color() / highest_color_id)
+        try:
+            node_colors.append(vertex.get_color() / highest_color_id)
+        except ZeroDivisionError:
+            node_colors.append(1)
 
     positions = nx.spring_layout(nx_graph)
 
@@ -33,7 +36,7 @@ def add_to_visualiztion(graph, ax):
         positions,
         cmap=plt.get_cmap("jet"),
         node_color=node_colors,
-        node_size=400,
+        node_size=300,
         ax=ax,
     )
 
@@ -55,24 +58,28 @@ def add_to_visualiztion(graph, ax):
         nx_graph,
         positions,
         font_weight="bold",
-        font_size=12,
+        font_size=9,
         labels=labels,
         ax=ax,
     )
 
 
-def visualize(graphs, algorithm_names):
+def visualize(graphs, titles, save_to_file, filename):
     num_graphs = len(graphs)
     n_rows = math.ceil(math.sqrt(num_graphs))
-    _, axes = plt.subplots(nrows=n_rows, ncols=n_rows)
+    fig, axes = plt.subplots(nrows=n_rows, ncols=n_rows)
     ax = axes.flatten()
 
     for i in range(n_rows * n_rows):
         ax[i].set_axis_off()
 
-    for i in range(len(graphs)):
+    for i in range(num_graphs):
         add_to_visualiztion(graphs[i], ax[i])
-        ax[i].set_title(algorithm_names[i])
+        ax[i].set_title(titles[i])
 
-    plt.get_current_fig_manager().set_window_title("Graph coloring")
-    plt.show()
+    if save_to_file:
+        fig.set_size_inches(30, 30)
+        plt.savefig(filename)
+    else:
+        plt.get_current_fig_manager().set_window_title("Graph coloring")
+        plt.show()
