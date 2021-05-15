@@ -29,7 +29,7 @@ def greedy_coloring(vertices, color_limit):
 
 def largest_first_coloring(vertices, color_limit):
     sorted_vertices = sorted(
-        copy.deepcopy(vertices), key=lambda vertex: vertex.get_degree()
+        copy.deepcopy(vertices), key=lambda vertex: vertex.get_degree(), reverse=True
     )
     return greedy_coloring(sorted_vertices, color_limit)
 
