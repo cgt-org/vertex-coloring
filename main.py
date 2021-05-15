@@ -1,2 +1,0 @@
-import Solution
-Solution.solve()
