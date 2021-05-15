@@ -3,6 +3,7 @@ __pycache__
 Pipfile
 Pipfile.lock
 .idea
+results
 
 # Created by https://www.toptal.com/developers/gitignore/api/qt,qtcreator,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=qt,qtcreator,python
