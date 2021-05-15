@@ -27,6 +27,13 @@ class Vertex:
 
     def get_degree(self):
         return len(self.neighbours)
+    
+    def get_saturation_degree(self):
+        satur = 0;
+        for v in self.neighbours:
+            if v.get_color() != -1:
+                satur += 1
+        return satur
 
     def get_color(self):
         return self.color_id

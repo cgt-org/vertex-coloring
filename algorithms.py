@@ -17,6 +17,8 @@ def greedy_coloring(vertices, color_limit):
         v.color_with(candidate_color)
         while not v.is_properly_colored():
             candidate_color += 1
+            while color_counter[candidate_color] >= color_limit:
+                candidate_color += 1
             v.color_with(candidate_color)
 
         color_counter[candidate_color] += 1
@@ -44,4 +46,29 @@ def smallest_last_coloring(vertices, color_limit):
     return greedy_coloring(sorted_vertices, color_limit)
 
 def d_satur_coloring(vertices, color_limit):
-    pass
+    if color_limit < 1:
+        print("Error: please input a valid color limit")
+        return
+    color_counter = Counter()
+    while any(v.get_color() == -1 for v in vertices):
+        # find vertex with lowest satur degree
+        max_satur = -1
+        max_index = -1
+        for i in range(len(vertices)):
+            if(vertices[i].get_saturation_degree() > max_satur and 
+               vertices[i].get_color() == -1):
+                max_index = i
+                max_satur = vertices[i].get_saturation_degree()
+        candidate_color = 0
+
+        while color_counter[candidate_color] >= color_limit:
+            candidate_color += 1
+
+        vertices[max_index].color_with(candidate_color)
+        while not vertices[max_index].is_properly_colored():
+            candidate_color += 1
+            while color_counter[candidate_color] >= color_limit:
+                candidate_color += 1
+            vertices[max_index].color_with(candidate_color)
+        color_counter[candidate_color] += 1
+    return vertices
