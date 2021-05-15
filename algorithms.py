@@ -50,6 +50,7 @@ def d_satur_coloring(vertices, color_limit):
         print("Error: please input a valid color limit")
         return
     color_counter = Counter()
+    sorted = []
     while any(v.get_color() == -1 for v in vertices):
         # find vertex with lowest satur degree
         max_satur = -1
@@ -71,4 +72,5 @@ def d_satur_coloring(vertices, color_limit):
                 candidate_color += 1
             vertices[max_index].color_with(candidate_color)
         color_counter[candidate_color] += 1
-    return vertices
+        sorted.append(vertices[max_index])
+    return sorted
