@@ -13,9 +13,16 @@ class Vertex:
     def add_neighbour(self, vertex):
         self.neighbours.append(vertex)
 
+    def contains_neighbour(self, vertex):
+        for neighbour in self.neighbours:
+            if vertex == neighbour:
+                return True
+
+        return False
+
     def remove_neighbour(self, vertex):
         for i in range(len(self.neighbours)):
-            if(self.neighbours[i].id == vertex.id):
+            if self.neighbours[i].id == vertex.id:
                 self.neighbours.pop(i)
                 return
 
@@ -27,9 +34,9 @@ class Vertex:
 
     def get_degree(self):
         return len(self.neighbours)
-    
+
     def get_saturation_degree(self):
-        satur = 0;
+        satur = 0
         for v in self.neighbours:
             if v.get_color() != -1:
                 satur += 1
@@ -51,6 +58,14 @@ class Graph:
 
     def color_with(self, algorithm_function, color_limit):
         self.vertices = algorithm_function(self.vertices, color_limit)
+
+    def get_number_of_colors(self):
+        color_set = set()
+
+        for vertex in self.vertices:
+            color_set.add(vertex.color_id)
+
+        return len(color_set)
 
     def check_proper_coloring(self, color_limit):
         color_list = []

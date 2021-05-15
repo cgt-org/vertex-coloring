@@ -24,7 +24,10 @@ def add_to_visualiztion(graph, ax):
 
     node_colors = []
     for vertex in graph.vertices:
-        node_colors.append(vertex.get_color() / highest_color_id)
+        try:
+            node_colors.append(vertex.get_color() / highest_color_id)
+        except ZeroDivisionError:
+            node_colors.append(1)
 
     positions = nx.spring_layout(nx_graph)
 
@@ -70,7 +73,7 @@ def visualize(graphs, titles, save_to_file, filename):
     for i in range(n_rows * n_rows):
         ax[i].set_axis_off()
 
-    for i in range(len(graphs)):
+    for i in range(num_graphs):
         add_to_visualiztion(graphs[i], ax[i])
         ax[i].set_title(titles[i])
 
