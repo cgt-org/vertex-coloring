@@ -58,6 +58,7 @@ class Graph:
 
     def color_with(self, algorithm_function, color_limit):
         self.vertices = algorithm_function(self.vertices, color_limit)
+        return self.vertices
 
     def get_number_of_colors(self):
         color_set = set()
