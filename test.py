@@ -1,5 +1,6 @@
 from graph import Graph, Vertex
 from algorithms import greedy_coloring, largest_first_coloring
+from visualization import visualize
 
 
 print("Testing 3-cycle")
@@ -33,3 +34,5 @@ print(five.check_proper_coloring(7))
 
 for v in five.vertices:
     print(f"{v.id} : {v.get_color()}")
+
+visualize([five, five, five], ["greedy1", "greedy2", "greedy3"])
