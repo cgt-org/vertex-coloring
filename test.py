@@ -35,4 +35,11 @@ print(five.check_proper_coloring(7))
 for v in five.vertices:
     print(f"{v.id} : {v.get_color()}")
 
-visualize([five, five, five], ["greedy1", "greedy2", "greedy3"])
+visualize(
+    [five, five, five],
+    [
+        f"greedy1, color limit: {7}, is proper: {five.check_proper_coloring(7)}",
+        f"greedy2, color limit: {7}, is proper: {five.check_proper_coloring(7)}",
+        f"greedy3, color limit: {7}, is proper: {five.check_proper_coloring(7)}",
+    ],
+)
