@@ -33,7 +33,7 @@ def add_to_visualiztion(graph, ax):
         positions,
         cmap=plt.get_cmap("jet"),
         node_color=node_colors,
-        node_size=150,
+        node_size=300,
         ax=ax,
     )
 
@@ -55,16 +55,16 @@ def add_to_visualiztion(graph, ax):
         nx_graph,
         positions,
         font_weight="bold",
-        font_size=5,
+        font_size=9,
         labels=labels,
         ax=ax,
     )
 
 
-def visualize(graphs, titles):
+def visualize(graphs, titles, save_to_file, filename):
     num_graphs = len(graphs)
     n_rows = math.ceil(math.sqrt(num_graphs))
-    _, axes = plt.subplots(nrows=n_rows, ncols=n_rows)
+    fig, axes = plt.subplots(nrows=n_rows, ncols=n_rows)
     ax = axes.flatten()
 
     for i in range(n_rows * n_rows):
@@ -74,5 +74,9 @@ def visualize(graphs, titles):
         add_to_visualiztion(graphs[i], ax[i])
         ax[i].set_title(titles[i])
 
-    plt.get_current_fig_manager().set_window_title("Graph coloring")
-    plt.show()
+    if save_to_file:
+        fig.set_size_inches(30, 30)
+        plt.savefig(filename)
+    else:
+        plt.get_current_fig_manager().set_window_title("Graph coloring")
+        plt.show()
