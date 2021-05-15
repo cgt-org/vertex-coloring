@@ -1,5 +1,5 @@
-from graph import Graph, Vertex
-from algorithms import greedy_coloring, largest_first_coloring
+from graph import *
+from algorithms import *
 
 
 print("Testing 3-cycle")
@@ -11,7 +11,7 @@ test.add_edge(1, 2)
 test.add_edge(2, 0)
 
 
-test.color_with(greedy_coloring, 7)
+test.color_with(largest_first_coloring, 7)
 
 print(test.check_proper_coloring(7))
 
@@ -28,7 +28,7 @@ five.add_edge(2, 3)
 five.add_edge(3, 4)
 five.add_edge(4, 0)
 
-five.color_with(greedy_coloring, 7)
+five.color_with(largest_first_coloring, 7)
 print(five.check_proper_coloring(7))
 
 for v in five.vertices:

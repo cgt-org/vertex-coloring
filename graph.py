@@ -13,6 +13,12 @@ class Vertex:
     def add_neighbour(self, vertex):
         self.neighbours.append(vertex)
 
+    def remove_neighbour(self, vertex):
+        for i in range(len(self.neighbours)):
+            if(self.neighbours[i].id == vertex.id):
+                self.neighbours.pop(i)
+                return
+
     def is_properly_colored(self):
         for n in self.neighbours:
             if n.get_color() == self.color_id:
@@ -37,7 +43,7 @@ class Graph:
         self.vertices[v_two_id].add_neighbour(self.vertices[v_one_id])
 
     def color_with(self, algorithm_function, color_limit):
-        algorithm_function(self.vertices, color_limit)
+        self.vertices = algorithm_function(self.vertices, color_limit)
 
     def check_proper_coloring(self, color_limit):
         color_list = []
