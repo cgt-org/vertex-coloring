@@ -7,6 +7,7 @@ def add_to_visualiztion(graph, ax):
     nx_graph = nx.Graph()
 
     highest_color_id = -1
+    coloring_order = -1
     labels = {}
     edges = []
     for vertex in graph.vertices:
@@ -15,7 +16,11 @@ def add_to_visualiztion(graph, ax):
         if vertex_color > highest_color_id:
             highest_color_id = vertex_color
 
-        nx_graph.add_node(vertex.id, attr_dict={"color_id": vertex_color})
+        coloring_order += 1
+        nx_graph.add_node(
+            vertex.id,
+            attr_dict={"color_id": vertex_color, "coloring_order": coloring_order},
+        )
 
         for neighbour in vertex.neighbours:
             edges.append((vertex.id, neighbour.id))
@@ -52,6 +57,7 @@ def add_to_visualiztion(graph, ax):
         labels[node] = {
             "id": node,
             "color_id": attr_dict["color_id"],
+            "coloring_order": attr_dict["coloring_order"],
         }
 
     nx.draw_networkx_labels(
