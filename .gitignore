@@ -2,3 +2,5 @@ __pycache__
 .vscode
 Pipfile
 Pipfile.lock
+build-graph_creator_GUI-Desktop-Debug
+**/*.user
