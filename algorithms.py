@@ -41,7 +41,7 @@ def smallest_last_coloring(vertices, color_limit):
             if processed[i].get_degree() < min_deg:
                 min_deg = processed[i].get_degree()
                 min_index = i
-        tmp = processed.pop(i)
+        tmp = processed.pop(min_index)
         sorted_vertices.append(tmp)
     return greedy_coloring(sorted_vertices, color_limit)
 
