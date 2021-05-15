@@ -1,9 +1,12 @@
+import getopt
+import json
+import sys
 import copy
 import datetime
 import os
 import random
 from visualization import visualize
-from graph import Graph, Vertex
+from graph import Graph, Vertex, create_graph_from_json
 from algorithms import smallest_last_coloring, largest_first_coloring, d_satur_coloring
 
 
@@ -176,4 +179,38 @@ def run_tests(num_random_tests, max_vertices):
 
 
 if __name__ == "__main__":
-    run_tests(num_random_tests=10, max_vertices=20)
+    usage_str = "tests.py [-h] [-f <file_with_graph_from_creator>] [-l <color_limit_for_input_file>] [-n <num_of_random_tests>] [-v <max_vertices_for_random_tests>]"
+
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "hf:n:v:l:")
+    except getopt.GetoptError:
+        print(usage_str)
+        sys.exit(2)
+
+    input_file = ""
+    max_vertices = 20
+    random_tests = 10
+    color_limit = 5
+
+    for opt, arg in opts:
+        if opt == "-h":
+            print(usage_str)
+            sys.exit()
+        elif opt == "-f":
+            input_file = arg
+        elif opt == "-n":
+            random_tests = int(arg)
+        elif opt == "-v":
+            max_vertices = int(arg)
+
+    if input_file == "":
+        print(
+            f"Running tests with {random_tests} random tests (max {max_vertices} vertices)"
+        )
+        run_tests(num_random_tests=random_tests, max_vertices=max_vertices)
+        print("Saved in the 'results' directory")
+    else:
+        print(f"Running test on {input_file} with color limit set to {color_limit}")
+        file = open(input_file)
+        json_data = json.load(file)
+        test_graph(create_graph_from_json(json_data), color_limit, save_to_file=False)

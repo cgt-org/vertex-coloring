@@ -86,3 +86,16 @@ class Graph:
                 return False
 
         return True
+
+
+def create_graph_from_json(json):
+    num_vertices = len(json)
+    graph = Graph(num_vertices)
+
+    for vertex_start_id, neighbours in json.items():
+        for neighbour_id in neighbours:
+            graph.vertices[int(vertex_start_id)].add_neighbour(
+                graph.vertices[int(neighbour_id)]
+            )
+
+    return graph
