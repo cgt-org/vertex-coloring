@@ -1,45 +1,30 @@
 from visualization import visualize
 from graph import *
 from algorithms import *
+import copy
 
 
-print("Testing 3-cycle")
-
-test = Graph(3)
-
-test.add_edge(0, 1)
-test.add_edge(1, 2)
-test.add_edge(2, 0)
+cycle_3 = Graph(3)
+cycle_3.add_edge(0, 1)
+cycle_3.add_edge(1, 2)
+cycle_3.add_edge(2, 0)
+cycle_3.color_with(d_satur_coloring, 7)
 
 
-test.color_with(d_satur_coloring, 7)
+cycle_5 = Graph(5)
+cycle_5.add_edge(0, 1)
+cycle_5.add_edge(1, 2)
+cycle_5.add_edge(2, 3)
+cycle_5.add_edge(3, 4)
+cycle_5.add_edge(4, 0)
+cycle_5.color_with(d_satur_coloring, 7)
 
-print(test.check_proper_coloring(7))
-
-for v in test.vertices:
-    print(f"{v.id} : {v.get_color()}")
-
-print("Testing 5-cycle")
-
-five = Graph(5)
-
-five.add_edge(0, 1)
-five.add_edge(1, 2)
-five.add_edge(2, 3)
-five.add_edge(3, 4)
-five.add_edge(4, 0)
-
-five.color_with(d_satur_coloring, 7)
-print(five.check_proper_coloring(7))
-
-for v in five.vertices:
-    print(f"{v.id} : {v.get_color()}")
 
 visualize(
-    [five, five, five],
+    [cycle_5, cycle_5, cycle_5],
     [
-        f"greedy1, color limit: {7}, is proper: {five.check_proper_coloring(7)}",
-        f"greedy2, color limit: {7}, is proper: {five.check_proper_coloring(7)}",
-        f"greedy3, color limit: {7}, is proper: {five.check_proper_coloring(7)}",
+        f"dSatur, vertices in one color limit: {7}, is proper: {cycle_5.check_proper_coloring(7)}",
+        f"dSatur, vertices in one color limit: {7}, is proper: {cycle_5.check_proper_coloring(7)}",
+        f"dSatur, vertices in one color limit: {7}, is proper: {cycle_5.check_proper_coloring(7)}",
     ],
 )
