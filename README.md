@@ -11,7 +11,8 @@ Required python packages: networkx, matplotlib <br/>
 
 ## Graph Creator Gui
 
-The graph creator is built using QMake version 3.1 using Qt version 5.15.2 <br/>
+The graph creator is built using QMake version 3.1 using Qt version 5.15.2 and g++ version 10.2.0 <br/>
+Proper functioning and compilation are not guaranteed unless exact versions are used. Some problems were noted while attempting compilation using g++ v. 9.3.0
 In order to compile the source code and get the exec file:
 
 ```
