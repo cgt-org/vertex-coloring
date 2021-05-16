@@ -202,6 +202,8 @@ if __name__ == "__main__":
             random_tests = int(arg)
         elif opt == "-v":
             max_vertices = int(arg)
+        elif opt == "-l":
+            color_limit = int(arg)
 
     if input_file == "":
         print(
